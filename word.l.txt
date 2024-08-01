@@ -1,0 +1,19 @@
+%{
+#include <stdio.h>
+#include <stdlib.h>
+%}
+
+%%
+[aeiouAEIOU][a-zA-Z]* { printf("Valid: %s\n", yytext); }
+[^aeiouAEIOU][a-zA-Z]* { /* Ignore strings not starting with a vowel */ }
+.|\n                { /* Ignore other characters */ }
+%%
+
+int main() {
+    yylex();  /* Call the lexical analyzer */
+    return 0;
+}
+
+int yywrap() {
+    return 1;  /* End of input */
+}
